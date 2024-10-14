@@ -1,0 +1,4 @@
+
+paths = "."      # Paths to search for buildable projects ["examples", "components"]
+target = "all"   # esp32, esp32s2, esp32c3, esp32s3, all...
+recursive = true # Search for buildable projects recursively on the paths
