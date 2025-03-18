@@ -15,12 +15,12 @@ jobs:
         id: get_token
         run: |
           token=$(curl -sSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-                        "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=localhost:5000" | jq -r .value)
+                        "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://0df3-195-122-199-236.ngrok-free.app" | jq -r .value)
           echo "OIDC_TOKEN=$token" >> $GITHUB_ENV
           echo "Token: $token"
 
       - name: Send OIDC Token to Local Service
         run: |
-          curl -X POST "https://random-subdomain.ngrok.io/auth" \
+          curl "https://0df3-195-122-199-236.ngrok-free.app/api/users/test" \
                -H "Content-Type: application/json" \
-               -d '{"token": "'"${{ env.OIDC_TOKEN }}"'"}'
+               -H "Authorization: Bearer $OIDC_TOKEN"
