@@ -21,6 +21,6 @@ jobs:
 
       - name: Send OIDC Token to Local Service
         run: |
-          curl "https://941e-195-122-199-236.ngrok-free.app" \
+          curl "https://941e-195-122-199-236.ngrok-free.app/api/users/test" \
                -H "Content-Type: application/json" \
                -H "Authorization: Bearer $OIDC_TOKEN"
