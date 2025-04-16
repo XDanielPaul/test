@@ -1,61 +1,61 @@
-# This is a basic workflow to help you get started with Actions
+# # This is a basic workflow to help you get started with Actions
 
-name: CI
+# name: CI
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: ["main"]
+# # Controls when the workflow will run
+# on:
+#   # Triggers the workflow on push or pull request events but only for the "main" branch
+#   push:
+#     branches: ["main"]
 
-jobs:
-  build:
-    strategy:
-      matrix:
-        idf_ver: ["latest"]
-    runs-on: ubuntu-latest
-    container: espressif/idf:${{ matrix.idf_ver }}
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          submodules: "recursive"
+# jobs:
+#   build:
+#     strategy:
+#       matrix:
+#         idf_ver: ["latest"]
+#     runs-on: ubuntu-latest
+#     container: espressif/idf:${{ matrix.idf_ver }}
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@v4
+#         with:
+#           submodules: "recursive"
 
-      - name: Action for Building and Uploading Binaries
-        uses: XDanielPaul/idf-examples-launchpad-ci-action@v1
-        with:
-          idf_version: ${{ matrix.idf_ver }}
+#       - name: Action for Building and Uploading Binaries
+#         uses: XDanielPaul/idf-examples-launchpad-ci-action@v1
+#         with:
+#           idf_version: ${{ matrix.idf_ver }}
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: built_files
-          path: binaries/
+#       - name: Upload Artifact
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: built_files
+#           path: binaries/
 
-  deploy:
-    needs: build
+#   deploy:
+#     needs: build
 
-    permissions:
-      pages: write
-      id-token: write
+#     permissions:
+#       pages: write
+#       id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download built files
-        uses: actions/download-artifact@v4
-        with:
-          name: built_files
-          path: binaries/
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Download built files
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: built_files
+#           path: binaries/
 
-      - name: Upload built files to gh pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: binaries/
+#       - name: Upload built files to gh pages
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: binaries/
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v4
