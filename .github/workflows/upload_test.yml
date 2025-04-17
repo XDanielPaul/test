@@ -16,6 +16,6 @@ jobs:
         uses: XDanielPaul/upload-components-ci-action@v2
         with:
           components: "cmp: ./cmp_ex"
-          version: "1.0.1"
+          version: "1.0.2"
           namespace: "XDanielPaul"
           registry_url: "https://104d-195-122-199-236.ngrok-free.app"
