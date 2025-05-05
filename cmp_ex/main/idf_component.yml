@@ -1,0 +1,3 @@
+dependencies:
+  example/cmp:
+    version: "^3.3.9"
