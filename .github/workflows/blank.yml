@@ -22,7 +22,7 @@ jobs:
           submodules: "recursive"
 
       - name: Action for Building and Uploading Binaries
-        uses: XDanielPaul/idf-examples-launchpad-ci-action@v1
+        uses: XDanielPaul/idf-examples-launchpad-ci-action@v2
         with:
           idf_version: ${{ matrix.idf_ver }}
 
