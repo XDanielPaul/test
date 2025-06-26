@@ -1,26 +1,22 @@
-name: Test OIDC
+name: Test OIDC upload
 
 on:
-  workflow_dispatch:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: ["main"]
 
 jobs:
-  check-oidc:
-    runs-on: ubuntu-latest
+  upload_components:
     permissions:
       id-token: write
-      contents: read
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Request OIDC Token
-        id: get_token
-        run: |
-          token=$(curl -sSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-                        "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://8fee-195-122-199-236.ngrok-free.app" | jq -r .value)
-          echo "OIDC_TOKEN=$token" >> $GITHUB_ENV
-          echo "Token: $token"
-
-      - name: Send OIDC Token to Local Service
-        run: |
-          curl "https://8fee-195-122-199-236.ngrok-free.app/api/users/test" \
-               -H "Content-Type: application/json" \
-               -H "Authorization: Bearer $OIDC_TOKEN"
+      - uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+      - name: Upload component to the component registry
+        uses: XDanielPaul/upload-components-ci-action@v2
+        with:
+          components: "banana: ./cmp_ex"
+          version: "3.3.13"
+          namespace: "xdanielpaul"
