@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: "recursive"
       - name: Upload component to the component registry
-        uses: XDanielPaul/upload-components-ci-action@v2
+        uses: XDanielPaul/upload-components-ci-action@fix/do_not_require_api_token_with_dry_run
         with:
           components: "banana: ./cmp_ex"
           version: "3.3.14"
