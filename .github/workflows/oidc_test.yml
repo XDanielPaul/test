@@ -7,8 +7,6 @@ on:
 
 jobs:
   upload_components:
-    permissions:
-      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,5 +16,7 @@ jobs:
         uses: XDanielPaul/upload-components-ci-action@v2
         with:
           components: "banana: ./cmp_ex"
-          version: "3.3.13"
+          version: "3.3.14"
           namespace: "xdanielpaul"
+          api-token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
+          dry-run: true
