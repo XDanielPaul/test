@@ -18,5 +18,5 @@ jobs:
         uses: espressif/upload-components-ci-action@v2
         with:
           components: "banana: ./cmp_ex"
-          version: "3.3.16"
+          version: "3.3.17"
           namespace: "xdanielpaul"
