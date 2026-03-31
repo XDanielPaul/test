@@ -1,0 +1,6 @@
+dependencies:
+  idf: '>=5.1'
+description: This component is an example, to be used with the IDF component manager.
+license: MIT
+targets: 
+  - esp32s31
